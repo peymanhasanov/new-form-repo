@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Qeydiyyat Formu</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f3f3f3, #d9d9d9);
+        }
+        .form-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 400px;
+            padding: 20px;
+            text-align: center;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        button {
+            background: #4CAF50;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        .hidden {
+            display: none;
+        }
+        .thank-you-message {
+            font-size: 18px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-top: 20px;
+        }
+        .contact-number-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .contact-number-container .country-code {
+            background: #f3f3f3;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 16px;
+            color: #555;
+            width: 70px;
+            text-align: center;
+            margin-right: 10px;
+            cursor: default;
+        }
+        .contact-number-container input {
+            flex-grow: 1;
+            padding-left: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>Qeydiyyat Formu</h2>
+    <form id="registrationForm" action="https://formspree.io/f/mgvwylep" method="POST">
+        <label for="fullName">Ad / Soyad:</label>
+        <input type="text" id="fullName" name="fullName" required placeholder="Adınızı ve soyadınızı girin">
+
+        <label for="education">Təhsil:</label>
+        <select id="education" name="education" required>
+            <option value="" disabled selected>Təhsilinizi seçin</option>
+            <option value="Ali təhsil">Ali təhsil</option>
+            <option value="Tam orta təhsil">Tam orta təhsil</option>
+            <option value="Orta təhsil">Orta təhsil</option>
+            <option value="Orta ixtisas-peşə təhsili">Orta ixtisas-peşə təhsili</option>
+        </select>
+
+        <label for="courseName">Təlim keçdiyi kursun adı:</label>
+        <input type="text" id="courseName" name="courseName" required placeholder="Təlim keçdiyiniz kursun adını qeyd edin">
+
+        <label for="trainingProgram">Keçdiyi təlim proqramı:</label>
+        <input type="text" id="trainingProgram" name="trainingProgram" required placeholder="Keçdiyiniz kursu qeyd edin">
+
+        <label for="contactNumber">Əlaqə nömrəsi:</label>
+        <div class="contact-number-container">
+            <div class="country-code">+994</div>
+            <input type="text" id="contactNumber" name="contactNumber" required placeholder="000000000" maxlength="9" pattern="[1-9][0-9]{8}" title="Lütfen sadece rakam girin, ilk hane 0 olmamalı ve toplam 9 haneli olmalıdır">
+        </div>
+
+        <button type="submit">Göndər</button>
+    </form>
+    <div id="thankYou" class="hidden thank-you-message">
+        Təşəkkür edirik! Sizinlə əlaqə saxlanılacaqdır.
+    </div>
+</div>
+
+<script>
+    document.getElementById('contactNumber').addEventListener('input', function(e) {
+    
+        this.value = this.value.replace(/[^0-9]/g, '');
+
+        if (this.value.length > 0 && this.value[0] === '0') {
+            this.value = this.value.substring(1);
+        }
+
+   
+        if (this.value.length > 9) {
+            this.value = this.value.substring(0, 9);
+        }
+    });
+</script>
+
+</body>
+</html>
